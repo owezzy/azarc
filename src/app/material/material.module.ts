@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 @NgModule({
   imports: [
@@ -21,6 +23,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    FormlyModule,
+    FormlyMaterialModule,
   ],
   exports: [
     MatInputModule,
@@ -32,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    FormlyMaterialModule,
   ],
 })
 export class MaterialModule {}

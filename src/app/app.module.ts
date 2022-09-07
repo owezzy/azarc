@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './core/container/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material';
@@ -19,6 +18,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { metaReducers, ROOT_REDUCERS } from './Store';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterEffects } from './core/effects';
+import { AuthModule } from './auth';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 const primaryColour = '#e91e63';
 
@@ -40,16 +44,17 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbThickness: 2,
 };
 @NgModule({
-  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    // Import the module into the application, with configuration
-    AuthModule.forRoot({
-      domain: environment.domain,
-      clientId: environment.clientId,
+    AuthModule,
+    AppRoutingModule,
+    FormlyModule.forRoot({
+      validationMessages: [
+        { name: 'required', message: 'This field is required' },
+      ],
     }),
+    FormlyMaterialModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
@@ -65,14 +70,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         strictActionTypeUniqueness: true,
       },
     }),
+    EffectsModule.forRoot([RouterEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       name: 'Azarc Solutions',
       logOnly: environment.ngrx_logs,
     }),
-    AuthModule,
     CoreModule,
-    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
