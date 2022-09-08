@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+@import'node_modules/@angular/flex-layout/core/sass/layout-bp';
+
+@import "./var";
+@import "./theme";
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core($config);
+
+@import "src/shared/page-layout/page-layout.directive";

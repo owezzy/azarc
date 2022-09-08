@@ -35,6 +35,11 @@ export const selectUser = createSelector(
   selectAuthStatusState,
   fromAuth.getUser
 );
+
+export const selectUserAddress = createSelector(
+  selectAuthStatusState,
+  fromAuth.getUserAddress
+);
 export const selectLoggedIn = createSelector(selectUser, (user) => !!user);
 
 export const selectLoginPageState = createSelector(

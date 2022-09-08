@@ -9,5 +9,7 @@ import * as fromAuth from '../../reducers/index';
 })
 export class UserProfilePageComponent {
   user$ = this.store.select(fromAuth.selectUser);
+  userAddress$ = this.store.select(fromAuth.selectUserAddress);
+
   constructor(private store: Store) {}
 }

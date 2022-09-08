@@ -14,7 +14,7 @@
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
-          "error",
+          0,
           {
             "type": "attribute",
             "prefix": "app",
@@ -28,6 +28,10 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "@angular-eslint/no-host-metadata-property": [
+          "error",
+          { "allowStatic": true }
         ]
       }
     },

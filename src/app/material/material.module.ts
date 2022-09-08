@@ -11,9 +11,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MatMenuModule } from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
+    MatSortModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -25,8 +32,14 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
     MatDialogModule,
     FormlyModule,
     FormlyMaterialModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    FlexLayoutModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
+    MatSortModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -37,6 +50,11 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
     MatProgressSpinnerModule,
     MatDialogModule,
     FormlyMaterialModule,
+    MatMenuModule,
+    FlexLayoutModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class MaterialModule {}

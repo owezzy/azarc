@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserAddressModel } from '../models/user-address.model';
 
 @Component({
   selector: 'app-user-auth0-profile',
@@ -8,5 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class UserAuth0ProfileComponent {
   @Input() auth0Profile$: Observable<any>;
+  @Input() address$: UserAddressModel;
   constructor() {}
 }

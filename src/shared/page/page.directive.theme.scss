@@ -1,0 +1,10 @@
+@import'node_modules/@angular/flex-layout/core/sass/layout-bp';
+
+.fury-page {
+  padding: $padding;
+  display: block;
+
+  @include layout-bp(lt-md) {
+    padding: $padding-md;
+  }
+}

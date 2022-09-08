@@ -6,11 +6,10 @@ import { AppComponent } from './core/container/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
-import { MaterialModule } from './material';
 import {
   NgxUiLoaderConfig,
-  NgxUiLoaderHttpModule,
   NgxUiLoaderModule,
+  NgxUiLoaderRouterModule,
   POSITION,
   SPINNER,
 } from 'ngx-ui-loader';
@@ -48,6 +47,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     AuthModule,
+    CoreModule,
     AppRoutingModule,
     FormlyModule.forRoot({
       validationMessages: [
@@ -56,7 +56,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     }),
     FormlyMaterialModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgxUiLoaderHttpModule.forRoot({
+    NgxUiLoaderRouterModule.forRoot({
       showForeground: true,
       exclude: ['http://localhost:4200/'],
     }),
@@ -76,7 +76,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       name: 'Azarc Solutions',
       logOnly: environment.ngrx_logs,
     }),
-    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
