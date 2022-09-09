@@ -20,6 +20,7 @@ export default defineConfig({
   videoUploadOnPasses: false,
   waitForAnimations: true,
   chromeWebSecurity: false,
+  screenshotOnRunFailure: true,
   screenshotsFolder: 'cypress/screenshots',
   retries: {
     runMode: 2,
