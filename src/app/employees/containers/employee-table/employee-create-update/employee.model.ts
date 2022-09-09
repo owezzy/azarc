@@ -1,9 +1,11 @@
-export class Employee {
-  id: number;
+import { EmployeesInterface } from '../../../models/all-in-one-table.demo';
+
+export class Employee implements EmployeesInterface {
+  id: string;
   firstName: string;
   lastName: string;
   street: string;
-  zipcode: number;
+  zipcode: string;
   city: string;
   phoneNumber: string;
   mail: string;

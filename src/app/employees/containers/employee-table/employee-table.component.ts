@@ -2,21 +2,25 @@ import {
   AfterViewInit,
   Component,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { ListColumn } from '../../../../shared/list/list-column.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { filter, Observable, of, ReplaySubject } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { Employee } from './employee-create-update/employee.model';
-import { EMPLOYEES_TABLE_DEMO_DATA } from './all-in-one-table.demo';
+import { EmployeesInterface } from '../../models/all-in-one-table.demo';
 import { EmployeeCreateUpdateComponent } from './employee-create-update/employee-create-update.component';
 import { fadeInUpAnimation } from '../../../../shared/animations/fade-in-up.animation';
 import { fadeInRightAnimation } from '../../../../shared/animations/fade-in-right.animation';
+import { Store } from '@ngrx/store';
+import * as EmployeesActions from '../../actions/employees.actions';
+import * as EmployeeActions from '../../actions/employee.actions';
+import * as fromEmployees from '../../reducers/index';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-employee-table',
@@ -25,29 +29,31 @@ import { fadeInRightAnimation } from '../../../../shared/animations/fade-in-righ
   animations: [fadeInRightAnimation, fadeInUpAnimation],
 })
 export class EmployeeTableComponent implements OnInit, AfterViewInit {
+  // handle subscriptions
+  subSink = new SubSink();
   /**
    * Simulating a service with HTTP that returns Observables
-   * You probably want to remove this and do all requests in a service with HTTP
+   * I am using NgRx Store as data store use selectors to get data
    */
-  subject$: ReplaySubject<Employee[]> = new ReplaySubject<Employee[]>(1);
-  data$: Observable<Employee[]> = this.subject$.asObservable();
-  employees: Employee[];
+  data$: Observable<Employee[]> = this.store.select(
+    fromEmployees.selectEmployeeCollection
+  ) as Observable<Employee[]>;
 
   @Input()
   columns: ListColumn[] = [
     { name: 'Checkbox', property: 'checkbox', visible: false },
     { name: 'Image', property: 'image', visible: true },
-    { name: 'Name', property: 'name', visible: true, isModelProperty: true },
+    { name: 'Name', property: 'name', visible: false, isModelProperty: true },
     {
       name: 'First Name',
       property: 'firstName',
-      visible: false,
+      visible: true,
       isModelProperty: true,
     },
     {
       name: 'Last Name',
       property: 'lastName',
-      visible: false,
+      visible: true,
       isModelProperty: true,
     },
     {
@@ -77,7 +83,7 @@ export class EmployeeTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private store: Store) {}
 
   get visibleColumns() {
     return this.columns
@@ -85,27 +91,17 @@ export class EmployeeTableComponent implements OnInit, AfterViewInit {
       .map((column) => column.property);
   }
 
-  /**
-   * Example on how to get data and pass it to the table - usually you would want a dedicated service with a HTTP request for this
-   * We are simulating this request here.
-   */
-  getData() {
-    return of(
-      EMPLOYEES_TABLE_DEMO_DATA.map((customer) => new Employee(customer))
-    );
-  }
-
   ngOnInit() {
-    this.getData().subscribe((customers) => {
-      this.subject$.next(customers);
-    });
+    this.store.dispatch(EmployeesActions.loadEmployees());
 
     this.dataSource = new MatTableDataSource();
 
-    this.data$.pipe(filter((data) => !!data)).subscribe((customers) => {
-      this.employees = customers;
-      this.dataSource.data = customers;
-    });
+    this.subSink.add(
+      this.data$.pipe(filter((data) => !!data)).subscribe((customers) => {
+        // console.log('this.data$.Sub', customers);
+        this.dataSource.data = customers;
+      })
+    );
   }
 
   ngAfterViewInit() {
@@ -114,60 +110,62 @@ export class EmployeeTableComponent implements OnInit, AfterViewInit {
   }
 
   createCustomer() {
-    this.dialog
-      .open(EmployeeCreateUpdateComponent)
-      .afterClosed()
-      .subscribe((customer: Employee) => {
-        /**
-         * Customer is the updated customer (if the user pressed Save - otherwise it's null)
-         */
-        if (customer) {
+    this.subSink.add(
+      this.dialog
+        .open(EmployeeCreateUpdateComponent)
+        .afterClosed()
+        .subscribe((employee: Employee) => {
           /**
-           * Here we are updating our local array.
-           * You would probably make an HTTP request here.
+           * Employee is the updated employee (if the user pressed Save - otherwise it's null)
            */
-          this.employees.unshift(new Employee(customer));
-          this.subject$.next(this.employees);
-        }
-      });
+          if (employee) {
+            /**
+             * Here we are updating our local array.
+             * You would probably make an HTTP request here.
+             */
+            const data: any = employee;
+
+            this.store.dispatch(EmployeeActions.createEmployee({ data }));
+          }
+        })
+    );
   }
 
-  updateCustomer(customer) {
-    this.dialog
-      .open(EmployeeCreateUpdateComponent, {
-        data: customer,
-      })
-      .afterClosed()
-      .subscribe((customer) => {
-        /**
-         * Customer is the updated customer (if the user pressed Save - otherwise it's null)
-         */
-        if (customer) {
+  updateCustomer(employee) {
+    this.subSink.add(
+      this.dialog
+        .open(EmployeeCreateUpdateComponent, {
+          data: employee,
+        })
+        .afterClosed()
+        .subscribe((employee) => {
           /**
-           * Here we are updating our local array.
-           * You would probably make an HTTP request here.
+           * Employee is the updated employee (if the user pressed Save - otherwise it's null)
            */
-          const index = this.employees.findIndex(
-            (existingCustomer) => existingCustomer.id === customer.id
-          );
-          this.employees[index] = new Employee(customer);
-          this.subject$.next(this.employees);
-        }
-      });
+          if (employee) {
+            /**
+             * Here we are updating our local array.
+             * You would probably make an HTTP request here.
+             */
+
+            const data: EmployeesInterface = employee;
+
+            this.store.dispatch(EmployeeActions.updateEmployee({ data }));
+          }
+        })
+    );
   }
 
-  deleteCustomer(customer) {
+  deleteCustomer(employee) {
     /**
      * Here we are updating our local array.
      * You would probably make an HTTP request here.
      */
-    this.employees.splice(
-      this.employees.findIndex(
-        (existingCustomer) => existingCustomer.id === customer.id
-      ),
-      1
-    );
-    this.subject$.next(this.employees);
+
+    const data: EmployeesInterface = employee;
+    // console.log(data);
+
+    this.store.dispatch(EmployeeActions.deleteEmployee({ data }));
   }
 
   onFilterChange(value) {

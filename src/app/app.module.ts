@@ -64,8 +64,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       metaReducers,
       runtimeChecks: {
         // strictStateImmutability and strictActionImmutability are enabled by default
-        strictStateSerializability: true,
-        strictActionSerializability: true,
+        // strictStateSerializability: true, disable to play with local JSON
+        // strictActionSerializability: true, disable to dispatch JSON as action
         strictActionWithinNgZone: true,
         strictActionTypeUniqueness: true,
       },

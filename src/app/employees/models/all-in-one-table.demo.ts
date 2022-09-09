@@ -1,6 +1,6 @@
 export const EMPLOYEES_TABLE_DEMO_DATA = [
   {
-    id: 0,
+    id: 30,
     firstName: 'Dejesus',
     lastName: 'Chang',
     street: '899 Raleigh Place',
@@ -304,6 +304,8 @@ export const EMPLOYEES_TABLE_DEMO_DATA = [
 export interface EmployeesInterface {
   id: string;
   firstName: string;
+  name?: string;
+  address?: string;
   lastName: string;
   street: string;
   zipcode: string;

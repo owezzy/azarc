@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, exhaustMap, tap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, concatMap, exhaustMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import * as AuthActions from '../actions/auth.actions';
 import { AuthApiActions, LoginPageActions } from '../actions';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,10 @@ import { Action } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
+  ngrxOnInitEffects(): Action {
+    return AuthApiActions.checkLoginStatus();
+  }
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
@@ -24,7 +28,7 @@ export class AuthEffects {
     )
   );
 
-  loginSuccess$ = createEffect(() =>
+  checkLoginStatus$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthApiActions.checkLoginStatus),
       concatMap(() => {
@@ -33,20 +37,6 @@ export class AuthEffects {
           .pipe(map((user) => AuthApiActions.loginUserProfile({ user })));
       })
     )
-  );
-
-  ngrxOnInitEffects(): Action {
-    return AuthApiActions.checkLoginStatus();
-  }
-  loginRedirect$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthApiActions.loginRedirect, AuthActions.logout),
-        tap(() => {
-          this.router.navigate(['/login']);
-        })
-      ),
-    { dispatch: false }
   );
 
   logoutConfirmation$ = createEffect(() =>
@@ -66,13 +56,6 @@ export class AuthEffects {
       )
     )
   );
-
-  // logoutIdleUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserActions.idleTimeout),
-  //     map(() => AuthActions.logout())
-  //   )
-  // );
 
   constructor(
     private actions$: Actions,

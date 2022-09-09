@@ -12,11 +12,11 @@ export interface State {
 export const initialState: State = {
   user: null,
   address: {
-    recipientName: 'owen',
-    buildingName: 'munga aparments',
-    streetName: 'Eluid Wakaba',
-    postTown: 'Ngong Town',
-    postCode: '02008',
+    recipientName: 'John Doe',
+    buildingName: 'localhost',
+    streetName: '127.0.0.1',
+    postTown: 'Internet',
+    postCode: '80',
     officeLocation: 'Cape Town',
   },
 };
