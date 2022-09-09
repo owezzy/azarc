@@ -1,0 +1,11 @@
+{
+  "id": 33,
+  "firstName": "Test",
+  "newFirstName": "New Test",
+  "lastName": "Tester",
+  "street": "Cypress Avenue",
+  "zipcode": 5943,
+  "city": "London",
+  "phoneNumber": "+44 (123) 321-1234",
+  "mail": "test@test.com"
+}
