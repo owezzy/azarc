@@ -5,7 +5,7 @@
     <azarc-page-layout-content>
 <app-azarc-list name="Employees" [columns]="columns" (filterChange)="onFilterChange($event)">
 <div class="actions">
-  <button class="create" (click)="createCustomer()" type="button" mat-mini-fab color="primary">
+  <button data-test="data-table-create-button" class="create" (click)="createCustomer()" type="button" mat-mini-fab color="primary">
     <mat-icon>add</mat-icon>
   </button>
 </div>
