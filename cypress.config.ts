@@ -8,7 +8,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     supportFile: 'cypress/support/commands.ts',
     chromeWebSecurity: false,
-    experimentalSessionAndOrigin: true,
     waitForAnimations: true,
   },
 
