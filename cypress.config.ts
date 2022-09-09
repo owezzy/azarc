@@ -5,6 +5,7 @@ require('dotenv').config();
 
 export default defineConfig({
   e2e: {
+    specPattern: 'cypress/e2e/**/*.cy.{js,ts}',
     baseUrl: 'http://localhost:4200',
     supportFile: 'cypress/support/commands.ts',
     chromeWebSecurity: false,
@@ -20,17 +21,13 @@ export default defineConfig({
   },
   video: false,
   videoUploadOnPasses: false,
-  waitForAnimations: true,
-  chromeWebSecurity: false,
   screenshotOnRunFailure: true,
-  screenshotsFolder: 'cypress/screenshots',
   retries: {
     runMode: 2,
     openMode: 0,
   },
   projectId: 'azarc',
   env: {
-    // Auth0
     auth0_username: process.env.AUTH0_USERNAME,
     auth0_password: process.env.AUTH0_PASSWORD,
     auth0_domain: process.env.AZARC_AUTH0_DOMAIN,
