@@ -1,18 +1,22 @@
-img{
-  max-height: 300px;
-  max-width: 300px;
-  margin: 13px;
-
-}
-
 mat-card {
-  height: 80%;
-  width: 75%;
-  margin-top: 8px;
 
+  max-width: 600px;
 }
-
-mat-card-content{
+.employee-profile-container{
   margin: 13px;
-
 }
+
+.employee-address-profile{
+    max-width: 300px;
+}
+.mat-card > :last-child:not(.mat-card-footer), .mat-card-content > :last-child:not(.mat-card-footer) {
+  margin-bottom: 0;
+  margin-left: 27px;
+}
+
+@media screen and (max-width: 600px){
+  .mat-card > :last-child:not(.mat-card-footer), .mat-card-content > :last-child:not(.mat-card-footer) {
+    margin-bottom: 0;
+    margin-left: 0;
+  }}
+

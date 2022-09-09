@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+@import "src/styles/var";
+
+mat-card{
+  margin: 13px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.mat-row:hover {
+  //background: $theme-background-hover;
+}

@@ -18,6 +18,8 @@ import { UserProfilePageComponent } from './containers/user-profile-page/user-pr
 import { UserAuth0ProfileComponent } from './components/user-auth0-profile.component';
 import { UserAddressComponent } from './components/user-address.component';
 import { FormlyModule } from '@ngx-formly/core';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { UserProfilePageEffects } from './effects/user-profile-page.effects';
 
 export const COMPONENTS = [
   LoginFormComponent,
@@ -43,8 +45,9 @@ export const COMPONENTS = [
       name: fromAuth.authFeatureKey,
       reducer: fromAuth.reducers,
     }),
-    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forFeature([AuthEffects, UserProfilePageEffects]),
     FormlyModule,
+    NgxUiLoaderModule,
   ],
   declarations: COMPONENTS,
 })

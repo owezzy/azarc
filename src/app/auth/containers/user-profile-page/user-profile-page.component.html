@@ -1,6 +1,22 @@
 <!--<pre>{{ user$ | async  | json }}</pre>-->
-<div fxLayout="row" fxLayoutAlign="space-between none">
-  <app-user-auth0-profile [auth0Profile$]="user$"></app-user-auth0-profile>
-  <app-user-address></app-user-address>
+
+<div fxLayout="column" fxLayoutAlign="start center" class="employee-profile-container"  *ngIf="userAddress$ | async as AddressData">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title> My Profile</mat-card-title>
+    </mat-card-header>
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.xs="column"  fxLayoutAlign.xs="start center " class="employee-auth0-profile">
+    <mat-card-content>
+  <app-user-auth0-profile [auth0Profile$]="user$" [address$]="AddressData"></app-user-auth0-profile>
+    </mat-card-content>
+
+    <mat-card-content>
+  <div class="employee-address-profile"  >
+    <app-user-address [AddressDataValues]=AddressData></app-user-address>
+ </div>
+    </mat-card-content>
+
+  </div>
+  </mat-card>
 
 </div>

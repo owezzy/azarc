@@ -1,16 +1,14 @@
-<div *ngIf="auth0Profile$ | async as userAuth0Data" >
-
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{userAuth0Data.given_name | titlecase}}'s Profile</mat-card-title>
-    </mat-card-header>
+<div *ngIf="auth0Profile$ | async as userAuth0Data" xmlns="http://www.w3.org/1999/html">
     <img matCardImage [src]="userAuth0Data.picture"  referrerpolicy="no-referrer">
-    <mat-card-content>
       <p>Name: {{userAuth0Data.name | titlecase}}</p>
       <p>Email: {{userAuth0Data.email}}</p>
       <p>Verified Email: {{userAuth0Data.email_verified}}</p>
-
-    </mat-card-content>
-  </mat-card>
-  <img>
+      <address>Current Address:<br>
+        {{address$.recipientName }},<br>
+        {{address$.buildingName }},<br>
+        {{address$.streetName }},<br>
+        {{address$.postTown }},<br>
+        {{address$.postCode }},<br>
+        {{address$.officeLocation }}.<br>
+      </address>
 </div>

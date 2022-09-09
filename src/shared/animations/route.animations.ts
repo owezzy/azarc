@@ -2,6 +2,7 @@ import {
   animate,
   animation,
   query,
+  sequence,
   stagger,
   style,
   transition,

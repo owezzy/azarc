@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAuth from '../../reducers/index';
 
@@ -9,5 +9,7 @@ import * as fromAuth from '../../reducers/index';
 })
 export class UserProfilePageComponent {
   user$ = this.store.select(fromAuth.selectUser);
+  userAddress$ = this.store.select(fromAuth.selectUserAddress);
+
   constructor(private store: Store) {}
 }
