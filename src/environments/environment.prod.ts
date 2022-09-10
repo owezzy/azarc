@@ -3,7 +3,7 @@ export const environment = {
   domain: 'owezzy.auth0.com',
   clientId: '4LuVbbsZ60hlQNYmyFmiIsrRTYqJ22be',
   audience: 'YOUR_API_IDENTIFIER',
-  appUri: 'http://localhost:4200/',
+  appUri: 'https://main.d2d8hegiknd97j.amplifyapp.com/',
   errorPath: '/error',
   ngrx_logs: false,
   AUTH0_USERNAME: 'test@test.com',

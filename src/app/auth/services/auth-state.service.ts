@@ -20,7 +20,7 @@ export class AuthStateService {
 
   logout() {
     return this.auth0.logout({
-      returnTo: environment.appUri,
+      returnTo: environment.appUri + '/login',
     });
   }
 
