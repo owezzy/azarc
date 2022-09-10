@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
+import { environment } from '../../src/environments/environment';
 
-if (Cypress.env('auth0_client_id')) {
+if (environment.AUTH0_CLIENT_SECRET) {
   describe('Test Auth0 Authentication ', () => {
     it('Login Test User to Auth0', () => {
       cy.visit('/');
@@ -10,7 +11,7 @@ if (Cypress.env('auth0_client_id')) {
       //   Cypress.env('auth0_username'),
       //   Cypress.env('auth0_password')
       // );
-      const username = Cypress.env('auth0_username');
+      const username = environment.AUTH0_USERNAME;
 
       const log = Cypress.log({
         displayName: 'AUTH0 LOGIN',

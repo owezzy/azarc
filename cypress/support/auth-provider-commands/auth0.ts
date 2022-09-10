@@ -1,6 +1,5 @@
-// @ts-check
-///<reference path="../../global.d.ts" />
 import * as jwt from 'jsonwebtoken';
+import { environment } from '../../../src/environments/environment';
 
 Cypress.Commands.add(
   'loginByAuth0Api',
@@ -55,8 +54,8 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('loginTestUser', () => {
-  const username = Cypress.env('auth0_username');
-  const password = Cypress.env('auth0_password');
+  const username = environment.AUTH0_USERNAME;
+  const password = environment.AUTH0_PASSWORD;
 
   const usernameInput = cy.get('.auth0-lock-input-email');
   if (usernameInput) {
