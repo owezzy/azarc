@@ -15,4 +15,4 @@
 
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 import './commands';
-import './auth-provider-commands/auth0';
+// import './auth-provider-commands/auth0';
