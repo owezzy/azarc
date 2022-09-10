@@ -3,14 +3,23 @@ import { environment } from '../../src/environments/environment';
 
 if (environment.AUTH0_CLIENT_SECRET) {
   describe('Test Auth0 Authentication ', () => {
+    before(() => {
+      cy.visit('/');
+      // cy.logOutTestUser();
+    });
     it('Login Test User to Auth0', () => {
       cy.visit('/');
       cy.contains('azarc-solutions');
 
-      // cy.loginByAuth0Api(
-      //   Cypress.env('auth0_username'),
-      //   Cypress.env('auth0_password')
-      // );
+      cy.get('.auth0-lock-social-button-text').then((button) => {
+        if (button.hasClass('active')) {
+          button.click();
+          cy.wait(3000);
+          cy.logOutTestUser();
+        } else {
+        }
+      });
+
       const username = environment.AUTH0_USERNAME;
 
       const log = Cypress.log({

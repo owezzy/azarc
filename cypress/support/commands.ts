@@ -73,7 +73,7 @@ Cypress.Commands.add('logOutTestUser', () => {
     '.mat-toolbar > .mat-focus-indicator > .mat-button-wrapper > .mat-icon'
   );
   cy.get('.mat-drawer-inner-container');
-  menu.click();
+  menu.click({ force: true });
   cy.wait(1000);
 
   const signOut = cy.get(':nth-child(3) > .mat-list-item-content');
