@@ -13,8 +13,7 @@ if (environment.AUTH0_CLIENT_SECRET) {
 
       cy.get('.auth0-lock-social-button-text').then((button) => {
         if (button.hasClass('active')) {
-          cy.get('.auth0-lock-social-button-text').click();
-          // button.click();
+          button.click();
           cy.wait(3000);
           cy.logOutTestUser();
         } else {
