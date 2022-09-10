@@ -136,6 +136,9 @@ app Home Page
 app profile page
 [![Product Name Screen Shot][product-screenshot-3]](https://main.d2d8hegiknd97j.amplifyapp.com/#/)
 
+Amplify Console
+[![Product Name Screen Shot][product-screenshot-4]](https://main.d2d8hegiknd97j.amplifyapp.com/#/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
@@ -146,6 +149,7 @@ app profile page
 - [x] Employess Page
 - [x] AuthO authentication
 - [x] Cypress e2e tests
+- [x] AWS Amplify with CI-CD
 
 See the [open issues](https://github.com/owezzy/azarc/issues) for a full list of proposed features (and known issues).
 
@@ -212,5 +216,6 @@ Project Link: [https://github.com/owezzy/azarc](https://github.com/owezzy/azarc)
 [product-screenshot-1]: src/assets/screenshots/login.png
 [product-screenshot-2]: src/assets/screenshots/employees_page.png
 [product-screenshot-3]: src/assets/screenshots/profile.png
+[product-screenshot-4]: src/assets/screenshots/amplify_CI_CD.png
 [angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [angular-url]: https://angular.io/

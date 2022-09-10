@@ -19,7 +19,9 @@ export class AuthStateService {
   }
 
   logout() {
-    return this.auth0.logout();
+    return this.auth0.logout({
+      returnTo: environment.appUri,
+    });
   }
 
   getUserProfile() {
